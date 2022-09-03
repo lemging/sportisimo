@@ -1,0 +1,67 @@
+{if isset($paginator) && $paginator->getPageCount() > 1}
+    <ul class="pagination">
+        {var $pages = range(1, $paginator->getPageCount())}
+
+        {if !$paginator->isFirst()}
+            <li><a href="{link page!, page => $paginator->getPage() - 1}"><i class="material-icons">chevron_left</i></a></li>
+        {else}
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        {/if}
+
+        {if $paginator->getPageCount() < 8}
+            {foreach $pages as $page}
+                <li n:if="$paginator->getPage() === $page" class="active">
+                    <a href="#!">{$page}</a>
+                </li>
+                <li n:if="$paginator->getPage() !== $page" class="waves-effect">
+                    <a href="{link page! $page}">{$page}</a>
+                </li>
+            {/foreach}
+        {/if}
+
+        {if $paginator->getPageCount() >= 8}
+            {var $currentPage = $paginator->getPage()}
+            {var $countOfPages = $paginator->getPageCount()}
+            {var $radius = 3}
+            {var $left = $currentPage - $radius >= 1 ? $currentPage - $radius : 1}
+            {var $right = $currentPage + $radius <= $countOfPages ? $currentPage + $radius : $countOfPages}
+
+            <li n:if="$left > 1" class="waves-effect">
+                <a href="{link page! 1}">1</a>
+            </li>
+            {if $left > 2}
+                <li class="disabled">&hellip;</li>
+            {/if}
+            {for $i = $left; $i <= $right; $i++}
+                {if ($i == $currentPage)}
+                    <li class="disabled">
+                        <a class="active">{$i}</a>
+                    </li>
+                {else}
+                    <li>
+                        <a href="{link page!, $i}">{$i}</a>
+                    </li>
+                {/if}
+            {/for}
+            {if $right < $countOfPages - 1}
+                <li class="disabled">&hellip;</li>
+            {/if}
+            {if $right < $countOfPages - 1}
+                <li>
+                    <a href="{link page!, $countOfPages}">{$countOfPages}</a>
+                </li>
+            {/if}
+        {/if}
+
+        {if $paginator->getPage() != $paginator->getLastPage()}
+            <li class="waves-effect"><a href="{link page!, page => $paginator->getPage() + 1}"><i class="material-icons">chevron_right</i></a></li>
+        {else}
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        {/if}
+    </ul>
+    <div>
+        {foreach $limits as $item}
+            <a n:href="limit, $item" class="waves-effect waves-light btn-small">{$item}</a>
+        {/foreach}
+    </div>
+{/if}

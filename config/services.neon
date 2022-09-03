@@ -1,0 +1,25 @@
+services:
+    - App\Model\Brand\BrandFacade
+    - App\Model\Brand\Managers\BrandManager
+    - App\Model\Brand\Managers\BrandCategoryManager
+    - Nette\Utils\Paginator
+    brandRepository:
+        class: App\Model\Brand\Repositories\BrandRepository
+        factory: @Doctrine\ORM\EntityManagerInterface::getRepository(App\Model\Brand\Entities\Brand)
+    brandCategoryRepository:
+        class: App\Model\Brand\Repositories\BrandCategoryRepository
+        factory: @Doctrine\ORM\EntityManagerInterface::getRepository(App\Model\Brand\Entities\BrandCategory)
+    brandsControlFactory:
+        implement: App\Front\Brand\Component\BrandsControl\IBrandsControlFactory
+    brandControlFactory:
+        implement: App\Front\Brand\Components\BrandControl\IBrandControlFactory
+    paginatorControlFactory:
+        implement: App\Core\Control\PaginatorControl\IPaginatorControlFactory
+    orderControlFactory:
+        implement: App\Core\Control\OrderControl\IOrderControlFactory
+    brandFormControlFactory:
+        implement: App\Front\Brand\Components\BrandFormControl\IBrandFormControlFactory
+    brandCategoriesControlFactory:
+        implement: App\Front\Brand\Components\BrandCategoriesControl\IBrandCategoriesControlFactory
+    - App\Router\RouterFactory::createRouter
+

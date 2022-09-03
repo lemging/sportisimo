@@ -1,0 +1,28 @@
+parameters:
+
+
+application:
+	errorPresenter: Error:Error
+	mapping:
+		Front: App\Front\Brand\Presenters\*Presenter
+		Error: App\Error\Presenters\*Presenter
+
+	# bude se při chybě volat error-presenter?
+	catchExceptions: false    # (bool) výchozí je true v produkčním režimu
+
+session:
+	expiration: 14 days
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+extensions:
+    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+doctrine.orm:
+	entityManagerDecoratorClass: App\Core\Doctrine\EntityManager
+
+includes:
+    - doctrine.neon

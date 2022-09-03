@@ -1,0 +1,17 @@
+{if count($brandCategories) !== 0}
+    <h5>Přidat značku do kategorie</h5>
+    <div class="collection">
+        {foreach $brandCategories as $brandCategory}
+            <div id="brandCategory-{$brandCategory->getId()}" class="modal">
+                <div class="modal-content">
+                    <h4>{$brandCategory->getTitle()}</h4>
+
+                    {control brandForm-{$brandCategory->getId()}}
+                </div>
+            </div>
+            <a class="collection-item modal-trigger" href="#brandCategory-{$brandCategory->getId()}">{$brandCategory->getTitle()}</a>
+        {/foreach}
+    </div>
+{else}
+    <div n:if="count($brandCategories) === 0">Nejsou žádné kategorie</div>
+{/if}

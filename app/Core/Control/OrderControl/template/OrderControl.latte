@@ -1,0 +1,7 @@
+<div n:inner-foreach="$orders as $order">
+    {if $activeOrder !== $order}
+        <a n:href="changeOrder, $order" class="waves-effect waves-light btn-small">{$orderDescriptions[$order]}</a>
+    {else}
+        <a n:href="changeOrder, $order" class="waves-effect waves-light btn-small disabled">{$orderDescriptions[$order]}</a>
+    {/if}
+</div>

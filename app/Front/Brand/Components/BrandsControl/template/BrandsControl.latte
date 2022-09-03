@@ -1,0 +1,10 @@
+<div>
+    {if count($brands) !== 0}
+        <div class="divider"></div>
+        {foreach $brands as $key => $_}
+            {control brand-{$key}}
+        {/foreach}
+    {else}
+        <div n:if="count($brands) === 0">Nejsou žádné značky</div>
+    {/if}
+</div>

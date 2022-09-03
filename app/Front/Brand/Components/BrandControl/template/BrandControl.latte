@@ -1,0 +1,21 @@
+{varType App\Model\Brand $brand}
+
+<div class="section">
+    <h5>{$brand->getTitle()}</h5>
+    <strong>{$brand->getCategory() !== null ? $brand->getCategory()->getTitle()}</strong>
+    <p>{$brand->getDescription()}</p>
+    <div id="brand-{$brand->getId()}" class="modal">
+        <div class="modal-content">
+            <h4>{$brand->getTitle()}</h4>
+
+            {control brandForm-{$brand->getId()}}
+        </div>
+    </div>
+    <a class="waves-effect orange darken-1 btn-small modal-trigger" href="#brand-{$brand->getId()}">
+        <i class="material-icons">edit</i>
+    </a>
+    <a n:href="removeBrand!" class="waves-effect red darken-1 btn-small modal-trigger">
+        <i class="material-icons">delete</i>
+    </a>
+</div>
+<div class="divider"></div>
